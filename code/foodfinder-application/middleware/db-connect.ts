@@ -1,15 +1,18 @@
 import mongoose, { ConnectOptions } from "mongoose";
 
-const MONGO_URI = process.env.MONGO_URI || " ";
-if (!MONGO_URI.length) {
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
     throw new Error(
         "Please define the MONGO_URI environment variable (.env.local)"
     );
 }
-let cached = global.mongoose;
+let cached = globalThis.mongoose;
 if (!cached) {
     cached = global.mongoose = { conn: null, promise: null };
 }
+
+const MONGO_URI_STRING: string = MONGO_URI;
+
 async function dbConnect(): Promise<any> {
     if (cached.conn) {
         return cached.conn;
@@ -22,7 +25,7 @@ async function dbConnect(): Promise<any> {
             socketTimeoutMS: 20000,
         };
         cached.promise = mongoose
-            .connect(MONGO_URI, opts)
+            .connect(MONGO_URI_STRING, opts)
             .then((mongoose) => mongoose)
             .catch((err) => {
                 throw new Error(String(err));
