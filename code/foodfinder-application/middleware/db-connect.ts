@@ -13,6 +13,9 @@ if (!cached) {
 
 const MONGO_URI_STRING: string = MONGO_URI;
 
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
+
 async function dbConnect(): Promise<any> {
     if (cached.conn) {
         return cached.conn;
