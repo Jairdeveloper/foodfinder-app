@@ -1,4 +1,4 @@
-import LocationsListItem from "../../location-list-item";
+import LocationsListItem from "../location-list-item";
 // import styles from "./index.module.css";
 import { LocationType } from "mongoose/locations/schema";
 import React, { JSX } from "react";
