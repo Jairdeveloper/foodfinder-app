@@ -1,11 +1,11 @@
 import Head from "next/head";
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import type { GetStaticProps, InferGetStaticPropsType, NextPage, GetServerSideProps, InferGetServerSidePropsType } from "next";
 import LocationsList from "components/locations-list";
 import dbConnect from "middleware/db-connect";
 import { findAllLocations } from "mongoose/locations/services";
 import { LocationType } from "mongoose/locations/schema";
 const Home: NextPage = (
-    props: InferGetStaticPropsType<typeof getStaticProps>
+    props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
 const locations: LocationType[] = JSON.parse(props.data?.locations);
     let title = `The Food Finder - Home`;
@@ -20,7 +20,7 @@ const locations: LocationType[] = JSON.parse(props.data?.locations);
         </div>
     );
 };
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     let locations: LocationType[] | [];
     try {
         await dbConnect();
