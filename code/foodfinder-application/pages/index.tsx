@@ -8,6 +8,7 @@ const Home: NextPage = (
     props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
 const locations: LocationType[] = JSON.parse(props.data?.locations);
+    console.log("Props data:", props.data);
     let title = `The Food Finder - Home`;
     return (
         <div>
@@ -23,12 +24,16 @@ const locations: LocationType[] = JSON.parse(props.data?.locations);
 export const getServerSideProps: GetServerSideProps = async () => {
     let locations: LocationType[] | [];
     try {
+        console.log("➡ Connecting to DB...");
         await dbConnect();
-locations = await findAllLocations();
+        console.log("✅ Connected");
+        locations = await findAllLocations();
+        console.log("📦 Locations from DB:", locations);
     } catch (err: any) {
+        console.error("❌ DB ERROR:", err);
         return { notFound: true };
     }
-return {
+    return {
         props: {
             data: { locations: JSON.stringify(locations) },
         },
