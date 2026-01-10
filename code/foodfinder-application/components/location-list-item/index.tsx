@@ -8,6 +8,7 @@ interface PropsInterface {
 }
 
 const LocationsListItem = (props: PropsInterface): React.ReactElement => {
+    console.log("Item location:", props.location);
     const location = props.location;
     return (
         <>

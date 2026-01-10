@@ -6,6 +6,7 @@ interface PropsInterface {
     locations: LocationType[];
 }
 const LocationsList = (props: PropsInterface): JSX.Element => {
+     console.log("LocationsList locations:", props.locations);
     return (
         <ul className="list-none">
             { props.locations.map((location) => {
