@@ -15,9 +15,10 @@ const LocationDetail = (props: PropsInterface): JSX.Element => {
     let location: LocationType = props.location;
 
 const { data: session } = useSession();
-    const [onWishlist, setOnWishlist] = useState<Boolean>(false);
-    const [loading, setLoading] = useState<Boolean>(false);
+const [onWishlist, setOnWishlist] = useState<Boolean>(false);
+const [loading, setLoading] = useState<Boolean>(false);
 useEffect(() => {
+        console.log("SESSION:", session);
         let userId = session?.user.fdlst_private_userId;
         setOnWishlist(
             userId && location.on_wishlist.includes(userId) ? true : false
