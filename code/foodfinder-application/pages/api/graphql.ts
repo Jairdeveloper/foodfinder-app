@@ -13,6 +13,7 @@ const server = new ApolloServer<BaseContext>({
 const handler = startServerAndCreateNextHandler(server, {
     context: async (req: NextApiRequest) => {
 const token = await getToken({ req });
+    console.log("TOKEN:", token);
         return { token };
     },
 });
