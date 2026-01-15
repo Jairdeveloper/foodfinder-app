@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     try {
         console.log("➡ Connecting to DB...");
         await dbConnect();
-        console.log("✅ Connected");
+        console.log("✅ Connected db");
         locations = await findAllLocations();
         console.log("📦 Locations from DB:", locations);
     } catch (err: any) {
